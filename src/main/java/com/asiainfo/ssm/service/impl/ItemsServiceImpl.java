@@ -33,8 +33,7 @@ public class ItemsServiceImpl implements ItemsService {
         return itemsCustom;
     }
 
-    public void updateItemsById(int id, ItemsCustom itemsCustom)  {
-        itemsCustom.setId(id);
-        itemsMapper.updateByPrimaryKey(itemsCustom);
+    public void updateItemsById(ItemsQueryVo itemsQueryVo)  {
+        itemsMapper.updateByPrimaryKey(itemsQueryVo.getItemsCustom());
     }
 }

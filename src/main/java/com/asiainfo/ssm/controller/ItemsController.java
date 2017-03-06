@@ -1,6 +1,7 @@
 package com.asiainfo.ssm.controller;
 
 import com.asiainfo.ssm.po.custom.ItemsCustom;
+import com.asiainfo.ssm.po.custom.ItemsQueryVo;
 import com.asiainfo.ssm.service.ItemsService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
@@ -10,6 +11,7 @@ import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.servlet.ModelAndView;
 
+import javax.servlet.http.HttpServletRequest;
 import java.util.List;
 
 /**
@@ -23,8 +25,8 @@ public class ItemsController {
     private ItemsService itemsService;
 
     @RequestMapping("/queryItem")
-    public ModelAndView findItemsList() throws Exception {
-        List<ItemsCustom> itemsList = itemsService.findItemsList(null);
+    public ModelAndView findItemsList(HttpServletRequest request, ItemsQueryVo itemsQueryVo) throws Exception {
+        List<ItemsCustom> itemsList = itemsService.findItemsList(itemsQueryVo);
         ModelAndView modelAndView = new ModelAndView();
         modelAndView.addObject("itemsList", itemsList);
         modelAndView.setViewName("items/itemsList");
@@ -57,8 +59,8 @@ public class ItemsController {
 //    }
 
     @RequestMapping(value = "/updateItems",method = RequestMethod.POST)
-    public String updateItems(Integer id, ItemsCustom itemsCustom) throws Exception {
-        itemsService.updateItemsById(id, itemsCustom);
+    public String updateItems(ItemsQueryVo itemsQueryVo) throws Exception {
+        itemsService.updateItemsById(itemsQueryVo);
 //        return "forward:queryItem.action";
         return "redirect:queryItem.action";
     }

@@ -13,6 +13,8 @@
     <label>查询条件：</label>
     <table>
         <tr>
+            <td>商品名称：</td>
+            <td><input type="text" name="itemsCustom.name"/></td>
             <td><input type="submit" value="查询"/></td>
         </tr>
     </table>
