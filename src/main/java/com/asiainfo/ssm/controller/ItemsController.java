@@ -48,6 +48,7 @@ public class ItemsController {
 
     @RequestMapping("/updateItems")
     public String updateItems() throws Exception {
+//        return "forward:queryItem.action";
         return "redirect:queryItem.action";
     }
 
