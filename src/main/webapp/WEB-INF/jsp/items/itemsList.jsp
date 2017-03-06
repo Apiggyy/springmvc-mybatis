@@ -7,41 +7,55 @@
 <head>
     <meta http-equiv="content-type" content="text/html;charset=utf-8"/>
     <title>商品列表</title>
+    <script type="text/javascript">
+        function deleteItems() {
+            document.getElementById("itemsOper").action = "${pageContext.request.contextPath}/items/deleteItems.action";
+            document.getElementById("itemsOper").submit();
+        }
+
+        function queryItems() {
+            document.getElementById("itemsOper").action = "${pageContext.request.contextPath}/items/queryItems.action";
+            document.getElementById("itemsOper").submit();
+        }
+    </script>
 </head>
 <body>
-<form action="${pageContext.request.contextPath}/items/queryItem.action" method="post">
+<form id="itemsOper" action="${pageContext.request.contextPath}/items/queryItems.action" method="post">
     <label>查询条件：</label>
     <table>
         <tr>
             <td>商品名称：</td>
             <td><input type="text" name="itemsCustom.name"/></td>
-            <td><input type="submit" value="查询"/></td>
+            <td><input type="button" value="查询" onclick="queryItems()"/></td>
+            <td><input type="button" value="批量删除" onclick="deleteItems()"/></td>
         </tr>
     </table>
-</form>
 
-<label>商品列表</label>
-<table width="100%" border="1">
-    <thead>
-    <tr>
-        <td>商品名称</td>
-        <td>商品明细</td>
-        <td>商品价格</td>
-        <td>创建时间</td>
-        <td>操作</td>
-    </tr>
-    </thead>
-    <tbody>
-    <c:forEach items="${itemsList}" var="items">
+    <label>商品列表</label>
+    <table width="100%" border="1">
+        <thead>
         <tr>
-            <td>${items.name}</td>
-            <td>${items.detail}</td>
-            <td>${items.price}</td>
-            <td><fmt:formatDate pattern="yyyy-MM-dd HH:mm:ss" value="${items.createtime}"/></td>
-            <td><a href="${pageContext.request.contextPath}/items/editItems.action?id=${items.id}">修改</a></td>
+            <td>选择</td>
+            <td>商品名称</td>
+            <td>商品明细</td>
+            <td>商品价格</td>
+            <td>创建时间</td>
+            <td>操作</td>
         </tr>
-    </c:forEach>
-    </tbody>
-</table>
+        </thead>
+        <tbody>
+        <c:forEach items="${itemsList}" var="items">
+            <tr>
+                <td><input type="checkbox" name="itemsIds" value="${items.id}"/></td>
+                <td>${items.name}</td>
+                <td>${items.detail}</td>
+                <td>${items.price}</td>
+                <td><fmt:formatDate pattern="yyyy-MM-dd HH:mm:ss" value="${items.createtime}"/></td>
+                <td><a href="${pageContext.request.contextPath}/items/editItems.action?id=${items.id}">修改</a></td>
+            </tr>
+        </c:forEach>
+        </tbody>
+    </table>
+</form>
 </body>
 </html>

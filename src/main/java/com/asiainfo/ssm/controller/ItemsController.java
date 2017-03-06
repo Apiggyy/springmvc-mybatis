@@ -24,7 +24,7 @@ public class ItemsController {
     @Autowired
     private ItemsService itemsService;
 
-    @RequestMapping("/queryItem")
+    @RequestMapping("/queryItems")
     public ModelAndView findItemsList(HttpServletRequest request, ItemsQueryVo itemsQueryVo) throws Exception {
         List<ItemsCustom> itemsList = itemsService.findItemsList(itemsQueryVo);
         ModelAndView modelAndView = new ModelAndView();
@@ -62,7 +62,13 @@ public class ItemsController {
     public String updateItems(ItemsQueryVo itemsQueryVo) throws Exception {
         itemsService.updateItemsById(itemsQueryVo);
 //        return "forward:queryItem.action";
-        return "redirect:queryItem.action";
+        return "redirect:queryItems.action";
+    }
+
+    @RequestMapping("/deleteItems")
+    public String deleteItems(Integer[] itemsIds) {
+        itemsService.deleteItemsByIds(itemsIds);
+        return "redirect:queryItems.action";
     }
 
 }

@@ -3,12 +3,15 @@ package com.asiainfo.ssm.service.impl;
 import com.asiainfo.ssm.dao.ItemsCustomMapper;
 import com.asiainfo.ssm.dao.ItemsMapper;
 import com.asiainfo.ssm.po.Items;
+import com.asiainfo.ssm.po.ItemsExample;
 import com.asiainfo.ssm.po.custom.ItemsCustom;
 import com.asiainfo.ssm.po.custom.ItemsQueryVo;
 import com.asiainfo.ssm.service.ItemsService;
 import org.springframework.beans.BeanUtils;
 import org.springframework.beans.factory.annotation.Autowired;
 
+import java.util.ArrayList;
+import java.util.Collections;
 import java.util.List;
 
 /**
@@ -35,5 +38,13 @@ public class ItemsServiceImpl implements ItemsService {
 
     public void updateItemsById(ItemsQueryVo itemsQueryVo)  {
         itemsMapper.updateByPrimaryKey(itemsQueryVo.getItemsCustom());
+    }
+
+    public void deleteItemsByIds(Integer[] ids) {
+        ItemsExample itemsExample = new ItemsExample();
+        List<Integer> idsList = new ArrayList<Integer>();
+        Collections.addAll(idsList, ids);
+        itemsExample.createCriteria().andIdIn(idsList);
+        itemsMapper.deleteByExample(itemsExample);
     }
 }
