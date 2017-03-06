@@ -47,4 +47,11 @@ public class ItemsServiceImpl implements ItemsService {
         itemsExample.createCriteria().andIdIn(idsList);
         itemsMapper.deleteByExample(itemsExample);
     }
+
+    public void updateItemsBatch(ItemsQueryVo itemsQueryVo) {
+        List<ItemsCustom> itemsCustomList = itemsQueryVo.getItemsCustoms();
+        for (ItemsCustom itemsCustom : itemsCustomList) {
+            itemsMapper.updateByPrimaryKey(itemsCustom);
+        }
+    }
 }

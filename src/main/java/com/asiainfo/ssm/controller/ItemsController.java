@@ -71,4 +71,19 @@ public class ItemsController {
         return "redirect:queryItems.action";
     }
 
+    @RequestMapping("/updateItemsBatch")
+    public ModelAndView updateItemsBatch(ItemsQueryVo itemsQueryVo) throws Exception {
+        List<ItemsCustom> itemsList = itemsService.findItemsList(itemsQueryVo);
+        ModelAndView modelAndView = new ModelAndView();
+        modelAndView.addObject("itemsList", itemsList);
+        modelAndView.setViewName("items/updateItemsBatch");
+        return modelAndView;
+    }
+
+    @RequestMapping("/updateItemsBatchSubmit")
+    public String batchEditItemsSubmit(ItemsQueryVo itemsQueryVo) throws Exception {
+        itemsService.updateItemsBatch(itemsQueryVo);
+        return "redirect:updateItemsBatch.action";
+    }
+
 }

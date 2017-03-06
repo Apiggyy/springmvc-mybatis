@@ -17,4 +17,6 @@ public interface ItemsService {
     public void updateItemsById(ItemsQueryVo itemsQueryVo);
 
     public void deleteItemsByIds(Integer[] ids);
+
+    public void updateItemsBatch(ItemsQueryVo itemsQueryVo);
 }
