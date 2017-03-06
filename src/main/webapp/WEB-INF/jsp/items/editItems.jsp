@@ -33,7 +33,7 @@
         </tr>
         <tr>
             <td>商品创建时间</td>
-            <td><input type="text" class="itemsInfo" name="createtime" value="<fmt:formatDate pattern="yyyy-MM-dd HH:mm:ss" value="${itemsCustom.createtime}"/>" readonly="readonly"/></td>
+            <td><input type="text" class="itemsInfo" name="createtime" value="<fmt:formatDate pattern="yyyy-MM-dd HH:mm:ss" value="${itemsCustom.createtime}"/>"/></td>
         </tr>
         <tr>
             <td colspan="2"><input type="submit" value="提交"/></td>
