@@ -11,6 +11,7 @@ import org.springframework.ui.ModelMap;
 import org.springframework.validation.BindingResult;
 import org.springframework.validation.FieldError;
 import org.springframework.validation.annotation.Validated;
+import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.servlet.ModelAndView;
@@ -29,6 +30,15 @@ public class ItemsController {
 
     @Autowired
     private ItemsService itemsService;
+
+    @ModelAttribute("itemsTypes")
+    public Map<String,String> getItemTypes() {
+        Map<String, String> itemsTypes = new HashMap<String, String>();
+        itemsTypes.put("101", "数码");
+        itemsTypes.put("102", "母婴");
+
+        return itemsTypes;
+    }
 
     @RequestMapping("/queryItems")
     public ModelAndView findItemsList(HttpServletRequest request, ItemsQueryVo itemsQueryVo) throws Exception {
@@ -52,7 +62,7 @@ public class ItemsController {
     @RequestMapping("/editItems")
     public String editItems(Model model,@RequestParam(value="id",required = true) int items_id) throws Exception {
         ItemsCustom itemsCustom = itemsService.findItemsById(items_id);
-        model.addAttribute("itemsCustom", itemsCustom);
+        model.addAttribute("items", itemsCustom);
         return "items/editItems";
     }
 
@@ -65,7 +75,7 @@ public class ItemsController {
 //    }
 
     @RequestMapping(value = "/updateItems")
-    public String updateItems(ModelMap modelMap, @Validated(value = {ValidGroup1.class}) ItemsCustom itemsCustom, BindingResult bindingResult) throws Exception {
+    public String updateItems(ModelMap modelMap, @ModelAttribute("items") @Validated(value = {ValidGroup1.class}) ItemsCustom itemsCustom, BindingResult bindingResult) throws Exception {
 
         if (bindingResult.hasErrors()) {
             Map<String, String> fieldErrorsMap = new HashMap<String, String>();

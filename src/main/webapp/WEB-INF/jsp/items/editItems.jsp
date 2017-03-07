@@ -26,12 +26,12 @@
 <lable>修改商品信息</lable>
 <form name="update_form" action="${pageContext.request.contextPath}/items/updateItems.action" method="post">
     <table width="100%" border="1">
-        <input type="hidden" name="id" value="${itemsCustom.id}" />
+        <input type="hidden" name="id" value="${items.id}" />
         <tr>
             <td class="left">商品名称</td>
             <td class="right">
                 <span>
-                    <input type="text" class="itemsInfo" name="name" value="${itemsCustom.name}"/>
+                    <input type="text" class="itemsInfo" name="name" value="${items.name}"/>
                     <c:if test="${fieldErrorsMap!=null}">
                     <c:if test="${fieldErrorsMap.name!=null}">
                       <c:out value="${fieldErrorsMap.name}"/>
@@ -43,17 +43,17 @@
         </tr>
         <tr>
             <td class="left">商品明细</td>
-            <td class="right"><textarea name="detail" class="itemsInfo"  rows="3" cols="20">${itemsCustom.detail}</textarea></td>
+            <td class="right"><textarea name="detail" class="itemsInfo"  rows="3" cols="20">${items.detail}</textarea></td>
         </tr>
         <tr>
             <td class="left">商品价格</td>
-            <td class="right"><input type="text" class="itemsInfo" name="price" value="${itemsCustom.price}"/></td>
+            <td class="right"><input type="text" class="itemsInfo" name="price" value="${items.price}"/></td>
         </tr>
         <tr>
             <td class="left">商品创建时间</td>
             <td class="right">
                 <span>
-                    <input type="text" class="itemsInfo" name="createtime" value="<fmt:formatDate pattern="yyyy-MM-dd HH:mm:ss" value="${itemsCustom.createtime}"/>"/>
+                    <input type="text" class="itemsInfo" name="createtime" value="<fmt:formatDate pattern="yyyy-MM-dd HH:mm:ss" value="${items.createtime}"/>"/>
                     <c:if test="${fieldErrorsMap!=null}">
                         <c:if test="${fieldErrorsMap.createtime!=null}">
                             <c:out value="${fieldErrorsMap.createtime}"/>
