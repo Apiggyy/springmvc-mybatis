@@ -1,5 +1,7 @@
 package com.asiainfo.ssm.po;
 
+import javax.validation.constraints.NotNull;
+import javax.validation.constraints.Size;
 import java.util.Date;
 
 public class Items {
@@ -17,6 +19,7 @@ public class Items {
      *
      * @mbggenerated
      */
+    @Size(min = 10,max=30,message = "{items.name.length.error}")
     private String name;
 
     /**
@@ -41,6 +44,7 @@ public class Items {
      *
      * @mbggenerated
      */
+    @NotNull(message = "{items.createtime.NotNull}")
     private Date createtime;
 
     /**
