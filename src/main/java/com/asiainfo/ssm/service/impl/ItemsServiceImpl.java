@@ -36,8 +36,8 @@ public class ItemsServiceImpl implements ItemsService {
         return itemsCustom;
     }
 
-    public void updateItemsById(ItemsQueryVo itemsQueryVo)  {
-        itemsMapper.updateByPrimaryKey(itemsQueryVo.getItemsCustom());
+    public void updateItemsById(ItemsCustom itemsCustom)  {
+        itemsMapper.updateByPrimaryKey(itemsCustom);
     }
 
     public void deleteItemsByIds(Integer[] ids) {

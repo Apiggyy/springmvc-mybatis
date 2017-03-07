@@ -6,16 +6,18 @@ import com.asiainfo.ssm.service.ItemsService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
+import org.springframework.ui.ModelMap;
 import org.springframework.validation.BindingResult;
-import org.springframework.validation.ObjectError;
+import org.springframework.validation.FieldError;
 import org.springframework.validation.annotation.Validated;
 import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.servlet.ModelAndView;
 
 import javax.servlet.http.HttpServletRequest;
+import java.util.HashMap;
 import java.util.List;
+import java.util.Map;
 
 /**
  * Created by weizm on 2017/3/2.
@@ -61,17 +63,20 @@ public class ItemsController {
 //        return modelAndView;
 //    }
 
-    @RequestMapping(value = "/updateItems",method = RequestMethod.POST)
-    public String updateItems(@Validated ItemsQueryVo itemsQueryVo, BindingResult bindingResult) throws Exception {
+    @RequestMapping(value = "/updateItems")
+    public String updateItems(ModelMap modelMap, @Validated ItemsCustom itemsCustom, BindingResult bindingResult) throws Exception {
 
         if (bindingResult.hasErrors()) {
-            List<ObjectError> allErrors = bindingResult.getAllErrors();
-            for (ObjectError objectError : allErrors) {
-                System.out.println(objectError.getDefaultMessage());
+            Map<String, String> fieldErrorsMap = new HashMap<String, String>();
+            List<FieldError> fieldErrors = bindingResult.getFieldErrors();
+            for (FieldError fieldError : fieldErrors) {
+                fieldErrorsMap.put(fieldError.getField(),fieldError.getDefaultMessage());
             }
+            modelMap.addAttribute("fieldErrorsMap", fieldErrorsMap);
+            return "items/editItems";
         }
 
-        itemsService.updateItemsById(itemsQueryVo);
+        itemsService.updateItemsById(itemsCustom);
 //        return "forward:queryItem.action";
         return "redirect:queryItems.action";
     }

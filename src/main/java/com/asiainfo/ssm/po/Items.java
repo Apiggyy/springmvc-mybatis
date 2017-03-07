@@ -19,7 +19,7 @@ public class Items {
      *
      * @mbggenerated
      */
-    @Size(min = 10,max=30,message = "{items.name.length.error}")
+    @Size(min = 1,max=30,message = "{items.name.length.error}")
     private String name;
 
     /**

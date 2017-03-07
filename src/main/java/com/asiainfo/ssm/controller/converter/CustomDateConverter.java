@@ -11,6 +11,7 @@ import java.util.Date;
  */
 public class CustomDateConverter implements Converter<String,Date>{
     public Date convert(String source) {
+        if(source == null || source.equals("")) return null;
         SimpleDateFormat sdf = new SimpleDateFormat("yyyy-MM-dd HH:mm:ss");
         try {
             return sdf.parse(source);
