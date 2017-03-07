@@ -1,5 +1,6 @@
 package com.asiainfo.ssm.controller;
 
+import com.asiainfo.ssm.controller.validation.ValidGroup1;
 import com.asiainfo.ssm.po.custom.ItemsCustom;
 import com.asiainfo.ssm.po.custom.ItemsQueryVo;
 import com.asiainfo.ssm.service.ItemsService;
@@ -64,7 +65,7 @@ public class ItemsController {
 //    }
 
     @RequestMapping(value = "/updateItems")
-    public String updateItems(ModelMap modelMap, @Validated ItemsCustom itemsCustom, BindingResult bindingResult) throws Exception {
+    public String updateItems(ModelMap modelMap, @Validated(value = {ValidGroup1.class}) ItemsCustom itemsCustom, BindingResult bindingResult) throws Exception {
 
         if (bindingResult.hasErrors()) {
             Map<String, String> fieldErrorsMap = new HashMap<String, String>();

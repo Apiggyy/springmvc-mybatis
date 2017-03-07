@@ -1,5 +1,8 @@
 package com.asiainfo.ssm.po;
 
+import com.asiainfo.ssm.controller.validation.ValidGroup1;
+import com.asiainfo.ssm.controller.validation.ValidGroup2;
+
 import javax.validation.constraints.NotNull;
 import javax.validation.constraints.Size;
 import java.util.Date;
@@ -19,7 +22,7 @@ public class Items {
      *
      * @mbggenerated
      */
-    @Size(min = 1,max=30,message = "{items.name.length.error}")
+    @Size(min = 1,max=30,message = "{items.name.length.error}",groups = {ValidGroup1.class})
     private String name;
 
     /**
@@ -44,7 +47,7 @@ public class Items {
      *
      * @mbggenerated
      */
-    @NotNull(message = "{items.createtime.NotNull}")
+    @NotNull(message = "{items.createtime.NotNull}",groups = {ValidGroup2.class})
     private Date createtime;
 
     /**
