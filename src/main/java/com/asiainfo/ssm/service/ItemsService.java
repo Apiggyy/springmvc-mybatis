@@ -14,9 +14,9 @@ public interface ItemsService {
 
     public ItemsCustom findItemsById(int id) throws Exception;
 
-    public void  updateItemsById(ItemsCustom itemsCustom);
+    public void  updateItemsById(ItemsCustom itemsCustom) throws  Exception;
 
-    public void deleteItemsByIds(Integer[] ids);
+    public void deleteItemsByIds(Integer[] ids) throws Exception;
 
-    public void updateItemsBatch(ItemsQueryVo itemsQueryVo);
+    public void updateItemsBatch(ItemsQueryVo itemsQueryVo) throws Exception;
 }

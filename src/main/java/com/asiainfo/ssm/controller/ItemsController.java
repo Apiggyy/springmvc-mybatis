@@ -93,7 +93,7 @@ public class ItemsController {
     }
 
     @RequestMapping("/deleteItems")
-    public String deleteItems(Integer[] itemsIds) {
+    public String deleteItems(Integer[] itemsIds) throws Exception {
         itemsService.deleteItemsByIds(itemsIds);
         return "redirect:queryItems.action";
     }

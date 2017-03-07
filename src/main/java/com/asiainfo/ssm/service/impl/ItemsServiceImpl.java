@@ -36,11 +36,11 @@ public class ItemsServiceImpl implements ItemsService {
         return itemsCustom;
     }
 
-    public void updateItemsById(ItemsCustom itemsCustom)  {
+    public void updateItemsById(ItemsCustom itemsCustom) throws Exception {
         itemsMapper.updateByPrimaryKey(itemsCustom);
     }
 
-    public void deleteItemsByIds(Integer[] ids) {
+    public void deleteItemsByIds(Integer[] ids) throws Exception{
         ItemsExample itemsExample = new ItemsExample();
         List<Integer> idsList = new ArrayList<Integer>();
         Collections.addAll(idsList, ids);
@@ -48,7 +48,7 @@ public class ItemsServiceImpl implements ItemsService {
         itemsMapper.deleteByExample(itemsExample);
     }
 
-    public void updateItemsBatch(ItemsQueryVo itemsQueryVo) {
+    public void updateItemsBatch(ItemsQueryVo itemsQueryVo) throws Exception {
         List<ItemsCustom> itemsCustomList = itemsQueryVo.getItemsCustoms();
         for (ItemsCustom itemsCustom : itemsCustomList) {
             itemsMapper.updateByPrimaryKey(itemsCustom);
