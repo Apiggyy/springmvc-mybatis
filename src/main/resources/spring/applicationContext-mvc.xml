@@ -61,4 +61,7 @@
         <property name="cacheSeconds" value="120"/>
     </bean>
 
+    <!--只要实现了HandlerExceptionResolver接口就是全局异常处理器-->
+    <bean class="com.asiainfo.ssm.exception.CustomExceptionResolver"/>
+
 </beans>
