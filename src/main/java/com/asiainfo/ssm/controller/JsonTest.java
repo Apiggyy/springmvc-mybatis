@@ -4,6 +4,7 @@ import com.asiainfo.ssm.po.custom.ItemsCustom;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.ResponseBody;
 
 /**
@@ -11,8 +12,13 @@ import org.springframework.web.bind.annotation.ResponseBody;
  */
 @Controller
 public class JsonTest {
-    @RequestMapping("/jsonRequest")
-    public @ResponseBody ItemsCustom jsonRequest(@RequestBody ItemsCustom itemsCustom) {
+    @RequestMapping(value="/requestJson",method = RequestMethod.POST)
+    public @ResponseBody ItemsCustom requestJson(@RequestBody ItemsCustom itemsCustom) {
+        return itemsCustom;
+    }
+
+    @RequestMapping(value="/responseJson",method = RequestMethod.POST)
+    public @ResponseBody ItemsCustom responseJson(ItemsCustom itemsCustom) {
         return itemsCustom;
     }
 }
