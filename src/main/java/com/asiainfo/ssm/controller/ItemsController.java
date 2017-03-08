@@ -14,6 +14,7 @@ import org.springframework.validation.annotation.Validated;
 import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
+import org.springframework.web.multipart.MultipartFile;
 import org.springframework.web.servlet.ModelAndView;
 
 import javax.servlet.http.HttpServletRequest;
@@ -32,7 +33,7 @@ public class ItemsController {
     private ItemsService itemsService;
 
     @ModelAttribute("itemsTypes")
-    public Map<String,String> getItemTypes() {
+    public Map<String, String> getItemTypes() {
         Map<String, String> itemsTypes = new HashMap<String, String>();
         itemsTypes.put("101", "数码");
         itemsTypes.put("102", "母婴");
@@ -60,7 +61,7 @@ public class ItemsController {
 //    }
 
     @RequestMapping("/editItems")
-    public String editItems(Model model,@RequestParam(value="id",required = true) int items_id) throws Exception {
+    public String editItems(Model model, @RequestParam(value = "id", required = true) int items_id) throws Exception {
         ItemsCustom itemsCustom = itemsService.findItemsById(items_id);
         model.addAttribute("items", itemsCustom);
         return "items/editItems";
@@ -75,16 +76,21 @@ public class ItemsController {
 //    }
 
     @RequestMapping(value = "/updateItems")
-    public String updateItems(ModelMap modelMap, @ModelAttribute("items") @Validated(value = {ValidGroup1.class}) ItemsCustom itemsCustom, BindingResult bindingResult) throws Exception {
+    public String updateItems(ModelMap modelMap, @ModelAttribute("items") @Validated(value = {ValidGroup1.class})
+            ItemsCustom itemsCustom, BindingResult bindingResult, MultipartFile multipartFile) throws Exception {
 
         if (bindingResult.hasErrors()) {
             Map<String, String> fieldErrorsMap = new HashMap<String, String>();
             List<FieldError> fieldErrors = bindingResult.getFieldErrors();
             for (FieldError fieldError : fieldErrors) {
-                fieldErrorsMap.put(fieldError.getField(),fieldError.getDefaultMessage());
+                fieldErrorsMap.put(fieldError.getField(), fieldError.getDefaultMessage());
             }
             modelMap.addAttribute("fieldErrorsMap", fieldErrorsMap);
             return "items/editItems";
+        }
+
+        if (multipartFile != null) {
+
         }
 
         itemsService.updateItemsById(itemsCustom);
