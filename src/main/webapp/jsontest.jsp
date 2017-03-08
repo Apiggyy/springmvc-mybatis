@@ -33,10 +33,11 @@
             });
         }
 
+
     </script>
 </head>
 <body>
-<form>
+<form id="jsonForm">
     <input type="button" onclick="requestJson()" value="请求是json，输出是json"/>
     <input type="button" onclick="responseJson()" value="请求是key/value，输出是json"/>
 </form>
