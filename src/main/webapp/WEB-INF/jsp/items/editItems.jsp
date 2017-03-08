@@ -24,7 +24,7 @@
 
 <br>
 <lable>修改商品信息</lable>
-<form name="update_form" action="${pageContext.request.contextPath}/items/updateItems.action" method="post">
+<form name="update_form" action="${pageContext.request.contextPath}/items/updateItems.action" method="post" enctype="multipart/form-data">
     <table width="100%" border="1">
         <input type="hidden" name="id" value="${items.id}" />
         <tr>

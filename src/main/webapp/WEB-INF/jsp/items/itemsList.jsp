@@ -20,7 +20,7 @@
     </script>
 </head>
 <body>
-<form id="itemsOper" action="${pageContext.request.contextPath}/items/queryItems.action" method="post">
+<form id="itemsOper" action="${pageContext.request.contextPath}/items/queryItems.action" method="post" enctype="multipart/form-data">
     <label>查询条件：</label>
     <table>
         <tr>
