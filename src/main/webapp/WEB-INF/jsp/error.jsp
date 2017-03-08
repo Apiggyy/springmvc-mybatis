@@ -8,6 +8,6 @@
     <title>未知错误</title>
 </head>
 <body>
-    未知错误！
+    ${message}
 </body>
 </html>

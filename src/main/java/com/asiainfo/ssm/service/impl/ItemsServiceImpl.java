@@ -2,6 +2,7 @@ package com.asiainfo.ssm.service.impl;
 
 import com.asiainfo.ssm.dao.ItemsCustomMapper;
 import com.asiainfo.ssm.dao.ItemsMapper;
+import com.asiainfo.ssm.exception.CustomException;
 import com.asiainfo.ssm.po.Items;
 import com.asiainfo.ssm.po.ItemsExample;
 import com.asiainfo.ssm.po.custom.ItemsCustom;
@@ -31,6 +32,10 @@ public class ItemsServiceImpl implements ItemsService {
 
     public ItemsCustom findItemsById(int id) throws Exception {
         Items items = itemsMapper.selectByPrimaryKey(id);
+        //全局异常处理
+        if (items == null) {
+            throw new CustomException("商品信息不存在！");
+        }
         ItemsCustom itemsCustom = new ItemsCustom();
         BeanUtils.copyProperties(items, itemsCustom);
         return itemsCustom;
