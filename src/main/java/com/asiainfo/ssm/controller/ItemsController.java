@@ -18,9 +18,11 @@ import org.springframework.web.multipart.MultipartFile;
 import org.springframework.web.servlet.ModelAndView;
 
 import javax.servlet.http.HttpServletRequest;
+import java.io.File;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
+import java.util.UUID;
 
 /**
  * Created by weizm on 2017/3/2.
@@ -65,7 +67,7 @@ public class ItemsController {
         ItemsCustom itemsCustom = itemsService.findItemsById(items_id);
         model.addAttribute("items", itemsCustom);
         return "items/editItems";
-    }
+}
 
 //    @RequestMapping("/updateItems")
 //    public ModelAndView updateItems() throws Exception {
@@ -77,7 +79,7 @@ public class ItemsController {
 
     @RequestMapping(value = "/updateItems")
     public String updateItems(ModelMap modelMap, @ModelAttribute("items") @Validated(value = {ValidGroup1.class})
-            ItemsCustom itemsCustom, BindingResult bindingResult, MultipartFile multipartFile) throws Exception {
+            ItemsCustom itemsCustom, BindingResult bindingResult, MultipartFile picFile) throws Exception {
 
         if (bindingResult.hasErrors()) {
             Map<String, String> fieldErrorsMap = new HashMap<String, String>();
@@ -89,13 +91,18 @@ public class ItemsController {
             return "items/editItems";
         }
 
-        if (multipartFile != null) {
-
+        if (picFile != null) {
+            String path = "D:\\备份资料\\subpic\\";
+            String originalFilename = picFile.getOriginalFilename();
+            String newFileName = UUID.randomUUID() + originalFilename.substring(originalFilename.lastIndexOf("."));
+            File newFile = new File(path+newFileName);
+            picFile.transferTo(newFile);
+            itemsCustom.setPic(newFileName);
         }
 
         itemsService.updateItemsById(itemsCustom);
 //        return "forward:queryItem.action";
-        return "redirect:queryItems.action";
+        return "success";
     }
 
     @RequestMapping("/deleteItems")

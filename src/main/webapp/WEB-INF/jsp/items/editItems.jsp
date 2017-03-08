@@ -51,7 +51,12 @@
         </tr>
         <tr>
             <td>商品图片</td>
-            <td><img src="/pic/${item.pic}" width="100px" height="100px"/></td>
+            <td>
+                <c:if test="${items.pic!=null}">
+                    <img src="/pic/subpic/${items.pic}" width="100px" height="100px"/>
+                </c:if>
+                <input type="file" name="picFile"/>
+            </td>
         </tr>
         <tr>
             <td class="left">商品创建时间</td>

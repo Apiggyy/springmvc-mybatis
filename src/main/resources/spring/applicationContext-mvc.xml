@@ -64,9 +64,12 @@
     <!--只要实现了HandlerExceptionResolver接口就是全局异常处理器-->
     <bean class="com.asiainfo.ssm.exception.CustomExceptionResolver"/>
 
-    <!--文件上传-->
-    <bean id="commonsMultipartResolver" class="org.springframework.web.multipart.commons.CommonsMultipartResolver">
-        <property name="maxUploadSize" value="5242880"/>
+    <!--文件上传解析器-->
+    <bean id="multipartResolver" class="org.springframework.web.multipart.commons.CommonsMultipartResolver">
+        <!--设置文件上传最大尺寸是5MB-->
+        <property name="maxUploadSize">
+            <value>5242880</value>
+        </property>
     </bean>
 
 </beans>
