@@ -50,6 +50,10 @@
             <td class="right"><input type="text" class="itemsInfo" name="price" value="${items.price}"/></td>
         </tr>
         <tr>
+            <td>商品图片</td>
+            <td><img src="/pic/${item.pic}" width="100px" height="100px"/></td>
+        </tr>
+        <tr>
             <td class="left">商品创建时间</td>
             <td class="right">
                 <span>
